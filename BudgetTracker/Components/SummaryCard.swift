@@ -38,20 +38,20 @@ struct SummaryCard: View {
                 .accessibilityIdentifier("summary.\(title.replacingOccurrences(of: " ", with: ""))")
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(14)
+        .padding(16)
         .background {
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(gradient ?? LinearGradient(
-                    colors: [tint.opacity(0.16), Color(.systemBackground)],
+                    colors: [tint.opacity(0.13), Color(.systemBackground)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 ))
                 .overlay(
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .strokeBorder(.white.opacity(0.35), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .strokeBorder(.white.opacity(0.28), lineWidth: 1)
                 )
         }
-        .shadow(color: .black.opacity(0.06), radius: 10, x: 0, y: 6)
+        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
     }
 }
 

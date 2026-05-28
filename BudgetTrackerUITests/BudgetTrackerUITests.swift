@@ -97,9 +97,9 @@ final class BudgetTrackerUITests: XCTestCase {
         app.buttons["addExpense.save"].tap()
 
         // Filter to Food and validate Bills is not shown (best-effort assertion).
-        let categoryPicker = app.segmentedControls["filters.category"]
-        XCTAssertTrue(categoryPicker.waitForExistence(timeout: 2))
-        categoryPicker.buttons["Food"].tap()
+        let foodFilter = app.buttons["filters.category.food"]
+        XCTAssertTrue(foodFilter.waitForExistence(timeout: 2))
+        foodFilter.tap()
 
         XCTAssertTrue(app.staticTexts["Food"].exists)
         XCTAssertFalse(app.staticTexts["Bills"].exists)

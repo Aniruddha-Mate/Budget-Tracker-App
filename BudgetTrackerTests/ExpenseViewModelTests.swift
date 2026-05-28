@@ -16,8 +16,8 @@ final class ExpenseViewModelTests: XCTestCase {
         vm.fetchExpenses(context: stack.context)
 
         XCTAssertEqual(vm.expenses.count, 2)
-        XCTAssertEqual(vm.expenses.first?.amount, 20, accuracy: 0.0001)
-        XCTAssertEqual(vm.expenses.last?.amount, 10, accuracy: 0.0001)
+        XCTAssertEqual(vm.expenses.first?.amount ?? 0, 20, accuracy: 0.0001)
+        XCTAssertEqual(vm.expenses.last?.amount ?? 0, 10, accuracy: 0.0001)
     }
 
     func test_addExpense_persistsAndRefreshes() throws {
@@ -28,7 +28,7 @@ final class ExpenseViewModelTests: XCTestCase {
 
         // VM refresh happens inside save()
         XCTAssertEqual(vm.expenses.count, 1)
-        XCTAssertEqual(vm.expenses.first?.amount, 99, accuracy: 0.0001)
+        XCTAssertEqual(vm.expenses.first?.amount ?? 0, 99, accuracy: 0.0001)
         XCTAssertEqual(vm.expenses.first?.category, "Food")
         XCTAssertEqual(vm.expenses.first?.note, "Lunch")
 

@@ -3,12 +3,18 @@ import CoreData
 
 struct HistoryView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.dismiss) private var dismiss
 
     @StateObject private var expenseVM = ExpenseViewModel()
     @State private var selectedCategory = "All"
     @State private var selectedDate = Date()
     @State private var isDateFilterEnabled = false
     @State private var showAddExpense = false
+    
+    var showsCustomBackButton: Bool = false
+    
+    private let brandGreen = Color(red: 0.10, green: 0.60, blue: 0.35)
+    private let brandMint = Color(red: 0.35, green: 0.78, blue: 0.55)
 
     private var filteredExpenses: [ExpenseEntity] {
         ExpenseFilter.apply(
@@ -41,8 +47,8 @@ struct HistoryView: View {
             LinearGradient(
                 colors: [
                     Color(.systemBackground),
-                    Color.teal.opacity(0.07),
-                    Color.pink.opacity(0.06)
+                    brandGreen.opacity(0.05),
+                    brandMint.opacity(0.035)
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -50,15 +56,26 @@ struct HistoryView: View {
             .ignoresSafeArea()
         )
         .navigationTitle("History")
+        .navigationBarTitleDisplayMode(.large)
+        .navigationBarBackButtonHidden(showsCustomBackButton)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    showAddExpense = true
-                } label: {
-                    Image(systemName: "cart.badge.plus")
+            if showsCustomBackButton {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: "chevron.left")
+                                .font(.subheadline.weight(.semibold))
+                            Text("Dashboard")
+                                .font(.subheadline.weight(.semibold))
+                        }
+                        .foregroundStyle(brandGreen)
+                    }
+                    .accessibilityIdentifier("history.back")
                 }
-                .accessibilityLabel("Add expense")
-                .accessibilityIdentifier("history.add")
             }
         }
         .sheet(isPresented: $showAddExpense) {
@@ -77,21 +94,21 @@ struct HistoryView: View {
                 Image(systemName: "cart.badge.plus")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundStyle(.white)
-                    .frame(width: 54, height: 54)
+                    .frame(width: 52, height: 52)
                     .background(
                         LinearGradient(
-                            colors: [.pink, .orange],
+                            colors: [brandGreen, brandMint],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
                     .clipShape(Circle())
-                    .shadow(color: .black.opacity(0.18), radius: 12, x: 0, y: 8)
+                    .shadow(color: .black.opacity(0.14), radius: 8, x: 0, y: 5)
             }
             .accessibilityLabel("Add expense")
             .accessibilityIdentifier("history.fabAdd")
-            .padding(.trailing, 18)
-            .padding(.bottom, 18)
+            .padding(.trailing, 16)
+            .padding(.bottom, 16)
         }
     }
 }

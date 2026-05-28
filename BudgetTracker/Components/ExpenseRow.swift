@@ -20,7 +20,7 @@ struct ExpenseRow: View {
                     .foregroundStyle(tint)
                     .imageScale(.medium)
             }
-            .frame(width: 38, height: 38)
+            .frame(width: 36, height: 36)
             .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 4) {
@@ -51,6 +51,6 @@ struct ExpenseRow: View {
                 .monospacedDigit()
                 .foregroundStyle(.primary)
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 6)
     }
 }

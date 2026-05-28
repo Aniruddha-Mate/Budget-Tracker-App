@@ -4,7 +4,6 @@ import Charts
 struct CategoryTotal: Identifiable {
 
     let id = UUID()
-
     let category: String
     let amount: Double
 }

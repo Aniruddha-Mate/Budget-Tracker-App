@@ -1,5 +1,6 @@
 import CoreData
 import XCTest
+@testable import BudgetTracker
 
 final class TestCoreDataStack {
     let container: NSPersistentContainer

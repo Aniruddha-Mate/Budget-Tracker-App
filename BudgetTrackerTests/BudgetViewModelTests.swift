@@ -24,7 +24,7 @@ final class BudgetViewModelTests: XCTestCase {
         let req = BudgetEntity.fetchRequest()
         let budgets = try stack.context.fetch(req)
         XCTAssertEqual(budgets.count, 1)
-        XCTAssertEqual(budgets.first?.monthlyBudget, 25000, accuracy: 0.0001)
+        XCTAssertEqual(budgets.first?.monthlyBudget ?? 0, 25000, accuracy: 0.0001)
     }
 
     func test_saveBudget_twice_editsExistingEntity() throws {
@@ -40,7 +40,7 @@ final class BudgetViewModelTests: XCTestCase {
         let req = BudgetEntity.fetchRequest()
         let budgets = try stack.context.fetch(req)
         XCTAssertEqual(budgets.count, 1)
-        XCTAssertEqual(budgets.first?.monthlyBudget, 2000, accuracy: 0.0001)
+        XCTAssertEqual(budgets.first?.monthlyBudget ?? 0, 2000, accuracy: 0.0001)
     }
 }
 

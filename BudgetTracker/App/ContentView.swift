@@ -1,13 +1,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    private enum Tab: Hashable {
+        case dashboard
+        case history
+    }
+    
+    @State private var selectedTab: Tab = .dashboard
     
     var body: some View {
         
-        TabView {
+        TabView(selection: $selectedTab) {
             NavigationStack {
-                DashboardView()
+                DashboardView {
+                    selectedTab = .history
+                }
             }
+            .tag(Tab.dashboard)
             .tabItem {
                 Label("Dashboard", systemImage: "house")
             }
@@ -16,6 +25,7 @@ struct ContentView: View {
             NavigationStack {
                 HistoryView()
             }
+            .tag(Tab.history)
             .tabItem {
                 Label("History", systemImage: "list.bullet.rectangle")
             }

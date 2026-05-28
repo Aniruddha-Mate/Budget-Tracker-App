@@ -2,8 +2,7 @@ import SwiftUI
 
 struct ExpenseHistoryView: View {
     
-    let expenses:
-    [ExpenseEntity]
+    let expenses: [ExpenseEntity]
     var title: String = "Expense History"
     var maxCount: Int? = nil
     let onDelete: (ExpenseEntity) -> Void

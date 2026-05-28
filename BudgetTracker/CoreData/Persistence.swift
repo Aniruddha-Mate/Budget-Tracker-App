@@ -24,4 +24,17 @@ struct PersistenceController {
         
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
+    
+    func clearAllData() {
+        let context = container.viewContext
+        let entityNames = ["ExpenseEntity", "BudgetEntity"]
+        
+        entityNames.forEach { entityName in
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            _ = try? context.execute(deleteRequest)
+        }
+        
+        context.reset()
+    }
 }

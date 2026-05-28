@@ -58,7 +58,7 @@ final class ExpenseFilterTests: XCTestCase {
         )
 
         XCTAssertEqual(result.count, 1)
-        XCTAssertEqual(result.first?.amount, 1, accuracy: 0.0001)
+        XCTAssertEqual(result.first?.amount ?? 0, 1, accuracy: 0.0001)
     }
 }
 
